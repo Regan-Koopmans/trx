@@ -1,1 +1,1 @@
-export { Stream } from "./stream";
+export { Stream } from "./stream.ts";

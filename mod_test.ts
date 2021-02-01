@@ -1,5 +1,5 @@
 import { assertEquals } from "./test_deps.ts";
-import { Stream } from "./stream.ts";
+import { Stream } from "./mod.ts";
 
 Deno.test({
   name: "stream creation (of)",
