@@ -1,25 +1,23 @@
+export class Stream {
+  private elements: any[];
 
-export class Stream { 
+  private constructor(incoming: any[]) {
+    this.elements = incoming;
+  }
 
-    private elements: any[];
+  static of(...elements: any[]): Stream {
+    return new Stream(elements);
+  }
 
-    private constructor(incoming: any[]) {
-        this.elements = incoming;
-    }
+  public map(lambda: any) {
+    return new Stream(this.elements.map(lambda));
+  }
 
-    static of(...elements: any[]): Stream {
-        return new Stream(elements);
-    }
+  public filter(predicate: any) {
+    return new Stream(this.elements.filter(predicate));
+  }
 
-    public map(lambda: any) {
-        return new Stream(this.elements.map(lambda));
-    }
-
-    public filter(predicate: any) {
-        return new Stream(this.elements.filter(predicate));
-    }
-
-    public blockingGet(): any[] {
-        return this.elements;
-    }
+  public blockingGet(): any[] {
+    return this.elements;
+  }
 }
