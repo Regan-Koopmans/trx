@@ -2,12 +2,21 @@ import { assertEquals } from "./test_deps.ts";
 import { Stream } from "./mod.ts";
 
 Deno.test({
-  name: "stream creation (of)",
+  name: "creation (of)",
   fn(): void {
     let stream = Stream.of(1, 2, 3);
     assertEquals(stream.blockingGet(), [1, 2, 3]);
   },
 });
+
+Deno.test({
+  name: "creation (fromList)",
+  fn(): void {
+    let stream = Stream.fromList([1, 2, 3]);
+    assertEquals(stream.blockingGet(), [1, 2, 3]);
+  },
+});
+
 
 Deno.test({
   name: "rudimentary map",
@@ -22,5 +31,13 @@ Deno.test({
   fn(): void {
     let stream = Stream.of(1, 2, 3).filter((x: number) => x % 2 == 0);
     assertEquals(stream.blockingGet(), [2]);
+  },
+});
+
+Deno.test({
+  name: "rudimentary reduce",
+  fn(): void {
+    let stream = Stream.of(1, 2, 3).reduce((x: number, y: number) =>  x + y);
+    assertEquals(stream.blockingGet(), 6);
   },
 });
